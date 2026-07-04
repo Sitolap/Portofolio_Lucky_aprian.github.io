@@ -1,458 +1,1005 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucky Aprian - Laravel Web Developer</title>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucky Aprian Tolap Bimantoro Simarmata — Software Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#FF2D20',
-                        secondary: '#1E293B',
-                        accent: '#F59E0B',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
+      :root {
+        --bg: #0b0e14;
+        --panel: #141822;
+        --panel-2: #181d28;
+        --border: #262d3d;
+        --text: #edeff4;
+        --muted: #8b93a7;
+        --amber: #e8a33d;
+        --amber-soft: #f0c88a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        position: relative;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.3;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      main,
+      header,
+      footer {
+        position: relative;
+        z-index: 2;
+      }
+
+      .font-display {
+        font-family: "Fraunces", serif;
+      }
+      .font-mono {
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      /* ---------- ambient hero glow ---------- */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(232, 163, 61, 0.28),
+          transparent 70%
+        );
+        filter: blur(50px);
+        z-index: 0;
+        pointer-events: none;
+        animation: drift 10s ease-in-out infinite;
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.7;
         }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        50% {
+          transform: translate(20px, -15px) scale(1.12);
+          opacity: 1;
         }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      /* ---------- nav ---------- */
+      .navlink {
+        position: relative;
+        color: var(--muted);
+        font-size: 0.93rem;
+        transition: color 0.25s;
+      }
+      .navlink:hover,
+      .navlink.active {
+        color: var(--text);
+      }
+      .navlink::after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        bottom: -6px;
+        height: 2px;
+        background: var(--amber);
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+      .navlink.active::after,
+      .navlink:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* ---------- cards ---------- */
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        transition:
+          transform 0.35s ease,
+          box-shadow 0.35s ease,
+          border-color 0.35s ease;
+      }
+      .card:hover {
+        border-color: rgba(232, 163, 61, 0.35);
+      }
+
+      .tape {
+        position: absolute;
+        width: 82px;
+        height: 28px;
+        background: repeating-linear-gradient(
+          45deg,
+          rgba(232, 163, 61, 0.9) 0 6px,
+          rgba(232, 163, 61, 0.72) 6px 12px
+        );
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+        color: #1a1000;
+        opacity: 0.95;
+        border-radius: 2px;
+      }
+
+      .tilt-1 {
+        transform: rotate(-1.6deg);
+      }
+      .tilt-2 {
+        transform: rotate(1.1deg);
+      }
+      .tilt-3 {
+        transform: rotate(-0.8deg);
+      }
+      .tilt-4 {
+        transform: rotate(1.4deg);
+      }
+
+      .project-card {
+        transition:
+          transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.4s ease;
+      }
+      .project-card:hover {
+        transform: rotate(0deg) translateY(-8px) scale(1.015) !important;
+        box-shadow: 0 20px 34px rgba(0, 0, 0, 0.4);
+      }
+
+      .badge {
+        background: var(--panel-2);
+        border: 1px solid rgba(232, 163, 61, 0.4);
+        color: var(--amber-soft);
+        font-size: 0.78rem;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      .pill {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.78rem;
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        color: var(--text);
+        border-radius: 20px;
+        padding: 6px 14px;
+        display: inline-block;
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          background 0.25s ease;
+      }
+      .pill:hover {
+        transform: translateY(-3px);
+        border-color: var(--amber);
+        background: rgba(232, 163, 61, 0.08);
+      }
+      .pill.big {
+        font-size: 0.88rem;
+        padding: 8px 18px;
+        border-color: rgba(232, 163, 61, 0.5);
+      }
+
+      .frame {
+        border: 10px solid var(--panel-2);
+        outline: 1px solid var(--border);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      .timeline-spine {
+        background-image: repeating-linear-gradient(
+          to bottom,
+          var(--border) 0 6px,
+          transparent 6px 12px
+        );
+        width: 2px;
+      }
+      .timeline-dot {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--amber);
+        box-shadow: 0 0 0 5px rgba(232, 163, 61, 0.14);
+        animation: pulse-dot 2.6s ease-in-out infinite;
+      }
+      @keyframes pulse-dot {
+        0%,
+        100% {
+          box-shadow: 0 0 0 5px rgba(232, 163, 61, 0.14);
         }
-        
-        .skill-badge:hover {
-            background-color: #FF2D20;
-            color: white;
+        50% {
+          box-shadow: 0 0 0 9px rgba(232, 163, 61, 0.07);
         }
+      }
+
+      .float {
+        animation: floatY 5.5s ease-in-out infinite;
+      }
+      @keyframes floatY {
+        0%,
+        100% {
+          transform: translateY(0) rotate(var(--r, 0deg));
+        }
+        50% {
+          transform: translateY(-9px) rotate(var(--r, 0deg));
+        }
+      }
+
+      .btn-primary {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgba(232, 163, 61, 0.28);
+      }
+      .btn-ghost {
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease,
+          border-color 0.25s ease;
+      }
+      .btn-ghost:hover {
+        transform: translateY(-2px);
+        border-color: var(--amber);
+        background: rgba(232, 163, 61, 0.06);
+      }
+
+      ::selection {
+        background: var(--amber);
+        color: var(--bg);
+      }
+
+      /* ---------- scroll reveal ---------- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-stagger > * {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal-stagger.in > * {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-stagger.in > *:nth-child(1) {
+        transition-delay: 0.03s;
+      }
+      .reveal-stagger.in > *:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .reveal-stagger.in > *:nth-child(3) {
+        transition-delay: 0.17s;
+      }
+      .reveal-stagger.in > *:nth-child(4) {
+        transition-delay: 0.24s;
+      }
+      .reveal-stagger.in > *:nth-child(5) {
+        transition-delay: 0.31s;
+      }
+      .reveal-stagger.in > *:nth-child(6) {
+        transition-delay: 0.38s;
+      }
+
+      .hero-word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(16px);
+        animation: heroIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      @keyframes heroIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .project-card,
+        .pill,
+        .btn-primary,
+        .btn-ghost,
+        .card {
+          transition: none;
+        }
+        .blob,
+        .timeline-dot,
+        .float {
+          animation: none;
+        }
+        .reveal,
+        .reveal-stagger > *,
+        .hero-word {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+        }
+      }
     </style>
-</head>
-<body class="bg-gray-50 text-secondary">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-xl font-bold text-primary">LA</span>
-                    <span class="ml-2 text-lg font-semibold hidden sm:block">Lucky Aprian</span>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-sm font-medium hover:text-primary transition">Home</a>
-                    <a href="#projects" class="text-sm font-medium hover:text-primary transition">Projects</a>
-                    <a href="#skills" class="text-sm font-medium hover:text-primary transition">Skills</a>
-                    <a href="#contact" class="text-sm font-medium hover:text-primary transition">Contact</a>
-                </div>
-                <div class="flex items-center md:hidden">
-                    <button class="mobile-menu-button">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+  </head>
+  <body class="antialiased">
+    <!-- ============ NAV ============ -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-5xl mx-auto mt-4 px-5">
+        <div
+          class="flex items-center justify-between rounded-full px-5 py-3"
+          style="
+            background: rgba(15, 19, 27, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+          "
+        >
+          <a
+            href="#top"
+            class="font-display font-semibold text-lg"
+            style="color: var(--text)"
+            >Lucky<span style="color: var(--amber)">.</span></a
+          >
+          <nav id="navlinks" class="hidden md:flex items-center gap-7">
+            <a href="#about" class="navlink" data-target="about">Tentang</a>
+            <a href="#experience" class="navlink" data-target="experience"
+              >Pengalaman</a
+            >
+            <a href="#skills" class="navlink" data-target="skills">Skills</a>
+            <a href="#projects" class="navlink" data-target="projects"
+              >Proyek</a
+            >
+            <a href="#contact" class="navlink" data-target="contact">Kontak</a>
+          </nav>
+          <button
+            id="menuBtn"
+            class="md:hidden font-mono text-sm"
+            style="color: var(--muted)"
+          >
+            ☰
+          </button>
         </div>
-    </nav>
+        <div
+          id="mobileMenu"
+          class="hidden flex-col mt-2 rounded-2xl px-5 py-3 gap-3"
+          style="background: var(--panel); border: 1px solid var(--border)"
+        >
+          <a href="#about" class="navlink py-1" data-target="about">Tentang</a>
+          <a href="#experience" class="navlink py-1" data-target="experience"
+            >Pengalaman</a
+          >
+          <a href="#skills" class="navlink py-1" data-target="skills">Skills</a>
+          <a href="#projects" class="navlink py-1" data-target="projects"
+            >Proyek</a
+          >
+          <a href="#contact" class="navlink py-1" data-target="contact"
+            >Kontak</a
+          >
+        </div>
+      </div>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-gradient text-white py-20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Halo Saya Lucky Aprian</h1>
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-accent">Laravel Web Developer</h2>
-                    <p class="text-lg mb-8 text-gray-300">Dengan latar belakang akademis saya yang kuat di bidang teknik informatika, saya memiliki pemahaman tentang konsep-konsep dasar seperti pemrograman, struktur data, dan algoritma.Keterampilan saya meliputi penggunaan bahasa pemrograman seperti HTML, CSS, Javascript, PHP.Keinginan saya untuk terus belajar dan eksplorasi dalam dunia informatika membuat saya bersemangat untuk menjalani pekerjaan yang dapat memperluas wawasan dan keterampilan saya</p>
-                    <div class="flex space-x-4">
-                        <a href="#contact" class="bg-primary hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition">Rekrut Saya</a>
-                        <a href="#projects" class="border border-white hover:bg-white hover:text-secondary text-white px-6 py-3 rounded-lg font-medium transition">Lihat Project</a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative">
-                        <div class="w-64 h-64 md:w-80 md:h-80 bg-primary rounded-full opacity-10 absolute -top-4 -left-4"></div>
-                        <div class="w-64 h-64 md:w-80 md:h-80 bg-accent rounded-full opacity-10 absolute -bottom-4 -right-4"></div>
-                        <img src="1.jpg" 
-                             alt="Lucky Aprian" 
-                             class="relative z-10 w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-white shadow-lg">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <section
+        class="relative pt-40 pb-24 px-6 max-w-5xl mx-auto overflow-hidden"
+      >
+        <div
+          class="blob"
+          style="width: 340px; height: 340px; top: -60px; right: -40px"
+        ></div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Project Laravel Saya</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Berikut adalah beberapa proyek terbaru saya yang dibuat menggunakan Laravel, yang menunjukkan keahlian saya dalam pengembangan backend dan kemampuan memecahkan masalah.
-</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="Screenshot 2025-06-02 114739.png" 
-                             alt="E-Commerce Dashboard" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-2">
-                            <span class="inline-block bg-primary text-white text-xs px-2 py-1 rounded mr-2">Laravel</span>
-                            <span class="inline-block bg-blue-500 text-white text-xs px-2 py-1 rounded">Bootstrap</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Website Pendaftaran Magang</h3>
-                        <p class="text-gray-600 mb-4">Project website pendaftaran magang menggunakan Laravel dan Bootstrap. Website ini mempermudah mahasiswa dalam pendaftaran magang di perusahaan.</p>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="Screenshot 2025-06-02 114304.png" 
-                             alt="" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-2">
-                            <span class="inline-block bg-primary text-white text-xs px-2 py-1 rounded mr-2">Laravel</span>
-                            <span class="inline-block bg-green-500 text-white text-xs px-2 py-1 rounded">Tailwind CSS</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">CBT (Computer Based Test)</h3>
-                        <p class="text-gray-600 mb-4">Project CBT menggunakan Laravel dan Tailwind CSS. CBT ini mempermudah pengguna dalam menghadapi ujian online. </p>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="Screenshot 2025-06-02 140409.png" 
-                             alt="Content Management System" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-2">
-                            <span class="inline-block bg-primary text-white text-xs px-2 py-1 rounded mr-2">Laravel</span>
-                            <span class="inline-block bg-purple-500 text-white text-xs px-2 py-1 rounded">Tailwind CSS</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Website E-Kantin</h3>
-                        <p class="text-gray-600 mb-4">Project website e-kantin menggunakan Laravel dan Tailwind CSS. Website ini mempermudah pengguna dalam memesan makanan dan minuman.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- <div class="text-center mt-12">
-                <a href="#" class="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-medium transition">View All Projects</a>
-            </div> -->
-        </div>
-    </section>
+        <div
+          class="grid lg:grid-cols-[1.3fr_0.9fr] gap-12 items-center relative"
+        >
+          <div>
+            <p
+              class="hero-word text-sm font-mono tracking-widest uppercase mb-3"
+              style="color: var(--amber); animation-delay: 0.05s"
+            >
+              Software Developer
+            </p>
+            <h1
+              class="font-display font-semibold leading-[1.05]"
+              style="font-size: clamp(2.2rem, 5.2vw, 3.6rem)"
+            >
+              <span class="hero-word" style="animation-delay: 0.12s"
+                >Lucky Aprian</span
+              ><br />
+              <span class="hero-word" style="animation-delay: 0.2s"
+                >Tolap Bimantoro</span
+              >
+              <span
+                class="hero-word italic"
+                style="color: var(--amber); animation-delay: 0.28s"
+                >Simarmata</span
+              >
+            </h1>
+            <p
+              class="hero-word mt-5 text-lg"
+              style="color: var(--muted); animation-delay: 0.36s"
+            >
+              Membangun aplikasi web dari nol sampai jadi — rapi di kodenya,
+              jelas alurnya.
+            </p>
+            <p
+              class="hero-word mt-5 max-w-xl leading-relaxed"
+              style="color: var(--muted); animation-delay: 0.44s"
+            >
+              Fresh graduate Pendidikan Teknik Informatika dan Komputer,
+              Universitas Negeri Jakarta (IPK 3.58). Terbiasa bekerja dengan
+              Laravel &amp; React, mengelola data di MySQL, dan menjaga kode
+              tetap rapi lewat Git — mulai dari sistem CRUD, aplikasi toko
+              online, sampai sistem ujian online.
+            </p>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Skills</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Saya memiliki keahlian di berbagai teknologi, dengan fokus utama pada ekosistem Laravel dan pengembangan web modern.</p>
+            <div
+              class="hero-word flex flex-wrap gap-3 mt-8"
+              style="animation-delay: 0.52s"
+            >
+              <a
+                href="#projects"
+                class="btn-primary px-5 py-2.5 rounded-full font-medium text-sm"
+                style="background: var(--amber); color: #1a1000"
+                >Lihat Proyek Saya</a
+              >
+              <a
+                href="#contact"
+                class="btn-ghost px-5 py-2.5 rounded-full text-sm border"
+                style="border-color: var(--border); color: var(--text)"
+                >Hubungi Saya</a
+              >
+              <a
+                href="CV_ATS_LUCKY APRIAN TOLAP BIMANTORO SIMARMATA.pdf"
+                download
+                class="btn-ghost px-5 py-2.5 rounded-full text-sm border"
+                style="border-color: transparent; color: var(--muted)"
+                >↓ Unduh CV</a
+              >
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <!-- Laravel -->
-                <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-laravel text-primary text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">Laravel</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
-                    </div>
-                </div>
-                
-                <!-- PHP -->
-                <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-php text-blue-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">PHP</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                </div>
-                
-                <!-- JavaScript -->
-                <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-js text-yellow-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">JavaScript</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 85%"></div>
-                    </div>
-                </div>
-                
-                <!-- Vue.js -->
-                <!-- <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-vuejs text-green-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">Vue.js</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                </div> -->
-                
-                <!-- Tailwind CSS -->
-                <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-wind text-blue-400 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">Tailwind CSS</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-400 h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                </div>
-                
-                <!-- MySQL -->
-                <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-database text-orange-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">MySQL</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-orange-500 h-2 rounded-full" style="width: 85%"></div>
-                    </div>
-                </div>
-                
-                <!-- Git -->
-                <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-git-alt text-red-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">Git</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-red-500 h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                </div>
-                
-                <!-- REST API -->
-                <!-- <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-code text-purple-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">REST API</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-purple-500 h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                </div> -->
-                
-                <!-- Docker -->
-                <!-- <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-docker text-blue-400 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">Docker</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-400 h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                </div> -->
-                
-                <!-- AWS -->
-                <!-- <div class="skill-badge bg-white p-6 rounded-xl shadow-sm text-center transition duration-300">
-                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <i class="fab fa-aws text-orange-500 text-4xl"></i>
-                    </div>
-                    <h3 class="font-semibold mb-2">AWS</h3>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-orange-500 h-2 rounded-full" style="width: 70%"></div>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- Experience Section -->
-    <!-- <section id="experience" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Professional Experience</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">My journey as a web developer with focus on Laravel framework and modern web technologies.</p>
+          <!-- pinned photo frame -->
+          <div
+            class="relative mx-auto hero-word"
+            style="max-width: 280px; animation-delay: 0.3s"
+          >
+            <div
+              class="tape tilt-2"
+              style="top: -14px; left: 50%; margin-left: -41px"
+            >
+              FOTO.JPG
             </div>
-            
-            <div class="relative">
-                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2"></div>
-                
-                <div class="mb-12 md:flex justify-between items-center w-full right-timeline">
-                    <div class="order-1 md:w-5/12"></div>
-                    <div class="order-1 hidden md:block w-2/12 py-4 flex justify-center">
-                        <div class="w-8 h-8 rounded-full bg-primary shadow-md"></div>
-                    </div>
-                    <div class="order-1 md:w-5/12 px-4 py-4 bg-gray-50 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold text-primary">Senior Laravel Developer</h3>
-                            <span class="text-sm bg-primary text-white px-2 py-1 rounded">2022 - Present</span>
-                        </div>
-                        <h4 class="text-lg font-semibold mb-2">TechSolutions Inc.</h4>
-                        <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                            <li>Led a team of 4 developers to build a SaaS platform with Laravel and Vue.js</li>
-                            <li>Implemented CI/CD pipeline reducing deployment time by 60%</li>
-                            <li>Optimized database queries improving application performance by 40%</li>
-                            <li>Mentored junior developers in Laravel best practices</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="mb-12 md:flex justify-between items-center w-full left-timeline">
-                    <div class="order-1 md:w-5/12 px-4 py-4 bg-gray-50 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold text-primary">Laravel Developer</h3>
-                            <span class="text-sm bg-primary text-white px-2 py-1 rounded">2020 - 2022</span>
-                        </div>
-                        <h4 class="text-lg font-semibold mb-2">Digital Creative Agency</h4>
-                        <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                            <li>Developed 15+ custom web applications for clients using Laravel</li>
-                            <li>Integrated third-party APIs including payment gateways and SMS services</li>
-                            <li>Implemented automated testing reducing bugs in production by 35%</li>
-                            <li>Created reusable Laravel packages for common functionality</li>
-                        </ul>
-                    </div>
-                    <div class="order-1 hidden md:block w-2/12 py-4 flex justify-center">
-                        <div class="w-8 h-8 rounded-full bg-primary shadow-md"></div>
-                    </div>
-                    <div class="order-1 md:w-5/12"></div>
-                </div>
-                
-                <div class="mb-12 md:flex justify-between items-center w-full right-timeline">
-                    <div class="order-1 md:w-5/12"></div>
-                    <div class="order-1 hidden md:block w-2/12 py-4 flex justify-center">
-                        <div class="w-8 h-8 rounded-full bg-primary shadow-md"></div>
-                    </div>
-                    <div class="order-1 md:w-5/12 px-4 py-4 bg-gray-50 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold text-primary">Junior Web Developer</h3>
-                            <span class="text-sm bg-primary text-white px-2 py-1 rounded">2018 - 2020</span>
-                        </div>
-                        <h4 class="text-lg font-semibold mb-2">StartUp Ventures</h4>
-                        <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                            <li>Built and maintained company website and internal tools with Laravel</li>
-                            <li>Collaborated with senior developers on complex features</li>
-                            <li>Learned modern web development practices and Laravel ecosystem</li>
-                            <li>Assisted in database design and API development</li>
-                        </ul>
-                    </div>
-                </div>
+            <div
+              class="frame tilt-1 relative float"
+              style="background: var(--panel-2); --r: 1.6deg"
+            >
+              <!-- GANTI: ganti div di bawah ini dengan <img src="foto-kamu.jpg" class="w-full aspect-[4/5] object-cover"> -->
+              <img
+                src="WhatsApp Image 2026-04-18 at 08.53.23.jpeg"
+                alt=""
+                class="w-full aspect-[4/5] object-cover"
+              />
+              <!-- <div class="flex flex-col items-center justify-center gap-2 aspect-[4/5]" style="color:var(--muted);">
+          <span class="text-xs font-mono px-6 text-center">taruh foto profesional kamu di sini</span>
+        </div> -->
             </div>
+            <div class="badge absolute -bottom-4 -right-4 tilt-3">
+              Fresh Graduate 2026
+            </div>
+          </div>
         </div>
-    </section> -->
+      </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                
+      <!-- ============ ABOUT ============ -->
+      <section id="about" class="px-6 max-w-5xl mx-auto py-16 scroll-mt-24">
+        <div class="grid md:grid-cols-[2fr_1fr] gap-10">
+          <div class="reveal">
+            <h2 class="font-display font-semibold text-3xl mb-6">
+              Tentang Saya
+            </h2>
+            <div class="card p-7 sm:p-9">
+              <p class="leading-relaxed" style="color: var(--muted)">
+                Saya merupakan seorang pengembang perangkat lunak yang fokus
+                pada pengembangan aplikasi berbasis web dengan pendekatan yang
+                terstruktur dan berorientasi pada hasil. Saya menguasai beberapa
+                bahasa pemrograman, antara lain
+                <span style="color: var(--text)"
+                  >PHP, JavaScript, dan Golang</span
+                >, serta berpengalaman menggunakan framework
+                <span style="color: var(--text)">Laravel</span> dan
+                <span style="color: var(--text)">React</span> untuk membangun
+                aplikasi yang responsif dan scalable.
+              </p>
+              <p class="leading-relaxed mt-4" style="color: var(--muted)">
+                Selain itu, saya terbiasa mengelola basis data dengan
+                <span style="color: var(--text)">MySQL</span> dan menggunakan
+                <span style="color: var(--text)">Git</span> untuk kolaborasi
+                serta manajemen versi kode. Kombinasi kemampuan teknis dan pola
+                pikir problem-solving membuat saya siap memberi kontribusi nyata
+                dalam pengembangan solusi digital yang efektif bagi perusahaan.
+              </p>
             </div>
-            
-            <div class="flex flex-col md:flex-row gap-12">
-                
-                
-                <div class="md:w-1/2">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- Footer -->
-    <footer class="bg-secondary text-white py-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <span class="text-xl font-bold text-primary">LA</span>
-                    <span class="ml-2 text-lg font-semibold">Lucky Aprian</span>
-                    <p class="mt-2 text-gray-400">Laravel Web Developer</p>
-                </div>
-                <div class="flex flex-col items-center md:items-end">
-                    <div class=" p-8 rounded-xl shadow-sm h-full">
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-lg text-primary">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-semibold text-gray-500">EMAIL</h4>
-                                    <a href="mailto:muhammad.faisal@example.com" class="text-lg font-medium hover:text-primary text-black transition">luckysimarmata5@gmail.com</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-lg text-primary">
-                                    <i class="fas fa-phone-alt text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-semibold text-gray-500">PHONE</h4>
-                                    <a href="tel:+6281234567890" class="text-lg font-medium hover:text-primary transition text-black">+6285776765418</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-lg text-primary">
-                                    <i class="fas fa-map-marker-alt text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-semibold text-gray-500">ADDRESS</h4>
-                                    <p class="text-lg font-medium text-black">Jakarta, Indonesia</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-10">
-                            <h4 class="text-lg font-semibold mb-4">Follow Me</h4>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/Sitolap" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-primary hover:text-white rounded-full text-gray-700 transition">
-                                    <i class="fab fa-github text-xl"></i>
-                                </a>
-                                <a href="http://linkedin.com/in/lucky-aprian/" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-blue-500 hover:text-white rounded-full text-gray-700 transition">
-                                    <i class="fab fa-linkedin-in text-xl"></i>
-                                </a>
-                                
-                                <a href="https://www.instagram.com/simarmata_lucky" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-pink-500 hover:text-white rounded-full text-gray-700 transition">
-                                    <i class="fab fa-instagram text-xl"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mb-4 text-gray-400">© 2025 Lucky Aprian. All rights reserved.</p>
-                    <div class="flex space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a>
-                    </div>
-                </div>
-            </div>
+          <div
+            class="reveal hidden md:flex items-center"
+            style="transition-delay: 0.15s"
+          >
+            <p
+              class="font-display italic text-2xl leading-snug"
+              style="color: var(--amber-soft)"
+            >
+              Senang membangun sesuatu end-to-end — dari struktur database
+              sampai tampilan akhirnya.
+            </p>
+          </div>
         </div>
+      </section>
+
+      <!-- ============ EXPERIENCE ============ -->
+      <section
+        id="experience"
+        class="px-6 max-w-5xl mx-auto py-16 scroll-mt-24"
+      >
+        <h2 class="reveal font-display font-semibold text-3xl mb-2">
+          Pengalaman Kerja
+        </h2>
+        <p
+          class="reveal font-display italic text-xl mb-10"
+          style="color: var(--amber-soft); transition-delay: 0.08s"
+        >
+          Dua magang, dua hal berbeda yang saya pelajari.
+        </p>
+
+        <div class="relative">
+          <div
+            class="timeline-spine absolute left-[7px] top-2 bottom-2 hidden sm:block"
+          ></div>
+
+          <div class="reveal relative sm:pl-14 mb-12">
+            <span
+              class="timeline-dot absolute left-0 top-1.5 hidden sm:block"
+            ></span>
+            <div class="card p-6 sm:p-7 tilt-3" style="max-width: 640px">
+              <p class="font-mono text-xs" style="color: var(--muted)">
+                Juli 2024 — Desember 2024
+              </p>
+              <h3 class="font-display font-semibold text-xl mt-1">
+                Guru (Magang)
+              </h3>
+              <p class="text-sm mt-0.5" style="color: var(--amber)">
+                SMKN 40 Jakarta · Kota Adm. Jakarta Timur, DKI Jakarta
+              </p>
+              <p class="mt-3 leading-relaxed" style="color: var(--muted)">
+                Mengajar Pemrograman Web (HTML, CSS, JavaScript) dan Pemrograman
+                Berorientasi Objek (PHP) kepada siswa — termasuk menyusun materi
+                ajar dan membimbing praktik langsung membuat program sederhana.
+              </p>
+            </div>
+          </div>
+
+          <div class="reveal relative sm:pl-14" style="transition-delay: 0.1s">
+            <span
+              class="timeline-dot absolute left-0 top-1.5 hidden sm:block"
+            ></span>
+            <div class="card p-6 sm:p-7 tilt-1" style="max-width: 640px">
+              <p class="font-mono text-xs" style="color: var(--muted)">
+                Januari 2024 — Mei 2024
+              </p>
+              <h3 class="font-display font-semibold text-xl mt-1">
+                Full Stack Developer (Magang)
+              </h3>
+              <p class="text-sm mt-0.5" style="color: var(--amber)">
+                Kominfo · Kota Adm. Jakarta Pusat, DKI Jakarta
+              </p>
+              <p class="mt-3 leading-relaxed" style="color: var(--muted)">
+                Membangun website pendaftaran magang agar pelajar bisa mendaftar
+                program magang secara online, tanpa perlu datang langsung ke
+                instansi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ EDUCATION ============ -->
+      <section id="education" class="px-6 max-w-5xl mx-auto py-16 scroll-mt-24">
+        <h2 class="reveal font-display font-semibold text-3xl mb-8">
+          Pendidikan
+        </h2>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="reveal card p-6 tilt-2 sm:-translate-y-2">
+            <p class="font-mono text-xs" style="color: var(--muted)">
+              2021 — 2026
+            </p>
+            <h3 class="font-display font-semibold text-lg mt-1">
+              Pendidikan Teknik Informatika dan Komputer
+            </h3>
+            <p class="text-sm mt-1" style="color: var(--amber)">
+              Universitas Negeri Jakarta
+            </p>
+            <p class="mt-3" style="color: var(--muted)">
+              IPK
+              <span
+                id="ipk-value"
+                class="font-display font-semibold text-2xl"
+                style="color: var(--amber-soft)"
+                >0.00</span
+              >
+            </p>
+          </div>
+          <div
+            class="reveal card p-6 tilt-4 sm:translate-y-2"
+            style="transition-delay: 0.1s"
+          >
+            <p class="font-mono text-xs" style="color: var(--muted)">
+              2018 — 2021
+            </p>
+            <h3 class="font-display font-semibold text-lg mt-1">
+              SMA — Jurusan IPA
+            </h3>
+            <p class="text-sm mt-1" style="color: var(--amber)">
+              SMAN 17 Kabupaten Tangerang
+            </p>
+            <p class="mt-3" style="color: var(--muted)">
+              Kab. Tangerang, Banten
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SKILLS ============ -->
+      <section id="skills" class="px-6 max-w-5xl mx-auto py-16 scroll-mt-24">
+        <h2 class="reveal font-display font-semibold text-3xl mb-1">
+          Keterampilan
+        </h2>
+        <p
+          class="reveal font-display italic text-xl mb-8"
+          style="color: var(--amber-soft); transition-delay: 0.06s"
+        >
+          Yang biasa saya pakai sehari-hari.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <p
+              class="reveal text-sm font-mono uppercase tracking-wider mb-3"
+              style="color: var(--muted)"
+            >
+              Bahasa Pemrograman
+            </p>
+            <div class="reveal-stagger flex flex-wrap gap-3" data-reveal>
+              <span class="pill big">PHP</span>
+              <span class="pill big">JavaScript</span>
+              <span class="pill">Golang</span>
+            </div>
+          </div>
+          <div>
+            <p
+              class="reveal text-sm font-mono uppercase tracking-wider mb-3"
+              style="color: var(--muted)"
+            >
+              Framework &amp; Library
+            </p>
+            <div class="reveal-stagger flex flex-wrap gap-3" data-reveal>
+              <span class="pill big">Laravel</span>
+              <span class="pill big">React.js</span>
+              <span class="pill">Tailwind CSS</span>
+              <span class="pill">Bootstrap</span>
+            </div>
+          </div>
+          <div>
+            <p
+              class="reveal text-sm font-mono uppercase tracking-wider mb-3"
+              style="color: var(--muted)"
+            >
+              Database &amp; Tools
+            </p>
+            <div class="reveal-stagger flex flex-wrap gap-3" data-reveal>
+              <span class="pill big">MySQL</span>
+              <span class="pill">HTML5 &amp; CSS3</span>
+              <span class="pill">Github</span>
+            </div>
+          </div>
+          <div>
+            <p
+              class="reveal text-sm font-mono uppercase tracking-wider mb-3"
+              style="color: var(--muted)"
+            >
+              Soft Skills
+            </p>
+            <div class="reveal-stagger flex flex-wrap gap-3" data-reveal>
+              <span class="pill">Communication Skills</span>
+              <span class="pill">Problem Solving</span>
+              <span class="pill">Analytical Skills</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECTS ============ -->
+      <section id="projects" class="px-6 max-w-5xl mx-auto py-20 scroll-mt-24">
+        <h2 class="reveal font-display font-semibold text-3xl mb-1">Proyek</h2>
+        <p
+          class="reveal font-display italic text-xl mb-10"
+          style="color: var(--amber-soft); transition-delay: 0.06s"
+        >
+          Beberapa yang sudah saya bangun end-to-end.
+        </p>
+
+        <div
+          class="reveal-stagger grid sm:grid-cols-2 lg:grid-cols-3 gap-10 pt-4"
+          data-reveal
+        >
+          <div
+            class="project-card card overflow-hidden relative tilt-1"
+            style="margin-top: 14px"
+          >
+            <!-- SCREENSHOT-1: ganti div di bawah ini dengan <img src="screenshot-pendaftaran-magang.png" class="w-full aspect-[16/10] object-cover"> -->
+            <img
+              src="Screenshot 2025-06-02 114739.png"
+              alt=""
+              class="w-full aspect-[15/10] object-cover"
+            />
+            <!-- <div class="flex flex-col items-center justify-center gap-2 aspect-[16/10] m-4 mb-0 rounded-lg" style="border:1.5px dashed var(--border); color:var(--muted);">
+        <span class="text-xs font-mono">screenshot-1.png</span>
+      </div> -->
+            <div class="p-5">
+              <h3 class="font-display font-semibold text-lg">
+                Website Pendaftaran Magang
+              </h3>
+              <p
+                class="mt-2 text-sm leading-relaxed"
+                style="color: var(--muted)"
+              >
+                Dibangun saat magang di Kominfo. Mempermudah pelajar mendaftar
+                program magang secara online tanpa harus datang langsung ke
+                instansi.
+              </p>
+              <p class="mt-3 text-xs font-mono" style="color: var(--muted)">
+                Laravel · Bootstrap
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="project-card card overflow-hidden relative tilt-4 sm:mt-6"
+            style="margin-top: 14px"
+          >
+            <!-- SCREENSHOT-2: ganti div di bawah ini dengan <img src="screenshot-cbt.png" class="w-full aspect-[16/10] object-cover"> -->
+            <img
+              src="Screenshot 2025-06-02 114304.png"
+              alt=""
+              class="w-full aspect-[15/10] object-cover"
+            />
+
+            <div class="p-5">
+              <h3 class="font-display font-semibold text-lg">
+                CBT — Computer Based Test
+              </h3>
+              <p
+                class="mt-2 text-sm leading-relaxed"
+                style="color: var(--muted)"
+              >
+                Sistem ujian online yang mempermudah pengguna mengerjakan tes
+                berbasis komputer secara terstruktur dan efisien.
+              </p>
+              <p class="mt-3 text-xs font-mono" style="color: var(--muted)">
+                Laravel · Tailwind CSS
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="project-card card overflow-hidden relative tilt-2"
+            style="margin-top: 14px"
+          >
+            <!-- SCREENSHOT-3: ganti div di bawah ini dengan <img src="screenshot-ekantin.png" class="w-full aspect-[16/10] object-cover"> -->
+            <img
+              src="Screenshot 2025-06-02 140409.png"
+              alt=""
+              class="w-full aspect-[15/10] object-cover"
+            />
+            <div class="p-5">
+              <h3 class="font-display font-semibold text-lg">
+                Website E-Kantin
+              </h3>
+              <p
+                class="mt-2 text-sm leading-relaxed"
+                style="color: var(--muted)"
+              >
+                Aplikasi pemesanan makanan dan minuman berbasis web, mempermudah
+                transaksi di kantin secara digital.
+              </p>
+              <p class="mt-3 text-xs font-mono" style="color: var(--muted)">
+                Laravel · Tailwind CSS
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="reveal mt-10 text-sm" style="color: var(--muted)">
+          Source code &amp; detail lainnya ada di
+          <a
+            href="https://github.com/Sitolap"
+            target="_blank"
+            rel="noopener"
+            class="hover:underline"
+            style="color: var(--text); text-decoration-color: var(--amber)"
+            >github.com/Sitolap</a
+          >
+        </p>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section id="contact" class="px-6 max-w-5xl mx-auto py-20 scroll-mt-24">
+        <h2 class="reveal font-display font-semibold text-3xl mb-1">
+          Hubungi Saya
+        </h2>
+        <p
+          class="reveal font-display italic text-xl mb-8"
+          style="color: var(--amber-soft); transition-delay: 0.06s"
+        >
+          Terbuka untuk peluang kerja dan kolaborasi baru.
+        </p>
+
+        <div class="reveal card p-8 sm:p-12" style="border-style: dashed">
+          <div class="grid sm:grid-cols-2 gap-8">
+            <div>
+              <p class="text-xs mb-1" style="color: var(--amber)">EMAIL</p>
+              <a
+                href="mailto:luckysimarmata5@gmail.com"
+                class="text-lg hover:underline"
+                >luckysimarmata5@gmail.com</a
+              >
+            </div>
+            <div>
+              <p class="text-xs mb-1" style="color: var(--amber)">TELEPON</p>
+              <a href="tel:+6285776765418" class="text-lg hover:underline"
+                >+62 857-7676-5418</a
+              >
+            </div>
+            <div>
+              <p class="text-xs mb-1" style="color: var(--amber)">ALAMAT</p>
+              <p class="text-lg">Parungpanjang, Kab. Bogor, Jawa Barat</p>
+            </div>
+            <div>
+              <p class="text-xs mb-1" style="color: var(--amber)">SOSIAL</p>
+              <div class="flex flex-col gap-1">
+                <a
+                  href="https://github.com/Sitolap"
+                  target="_blank"
+                  rel="noopener"
+                  class="hover:underline"
+                  >github.com/Sitolap</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="px-6 py-10 text-center">
+      <p class="font-display italic text-base" style="color: var(--muted)">
+        Lucky Aprian — 2026.
+      </p>
     </footer>
 
     <script>
-        // Simple mobile menu toggle functionality
-        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
-            // You would implement mobile menu toggle here
-            alert('Mobile menu would open here in a real implementation');
-        });
+      // active nav highlight
+      const navlinks = document.querySelectorAll(".navlink");
+      const sections = [
+        "about",
+        "experience",
+        "skills",
+        "projects",
+        "contact",
+      ].map((id) => document.getElementById(id));
+      const setActive = (id) =>
+        navlinks.forEach((t) =>
+          t.classList.toggle("active", t.dataset.target === id),
+        );
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        },
+        { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
+      );
+      sections.forEach((s) => s && navObserver.observe(s));
+
+      // mobile menu
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        mobileMenu.classList.toggle("flex");
+      });
+      mobileMenu.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          mobileMenu.classList.remove("flex");
+        }),
+      );
+
+      // scroll reveal
+      const revealEls = document.querySelectorAll(".reveal, .reveal-stagger");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      revealEls.forEach((el) => revealObserver.observe(el));
+
+      // animated IPK count-up
+      const ipkEl = document.getElementById("ipk-value");
+      let ipkAnimated = false;
+      const ipkObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !ipkAnimated) {
+              ipkAnimated = true;
+              const target = 3.58;
+              const duration = 1100;
+              const start = performance.now();
+              const tick = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                ipkEl.textContent = (eased * target).toFixed(2);
+                if (progress < 1) requestAnimationFrame(tick);
+              };
+              requestAnimationFrame(tick);
+              ipkObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.4 },
+      );
+      if (ipkEl) ipkObserver.observe(ipkEl);
     </script>
-</body>
+  </body>
 </html>
